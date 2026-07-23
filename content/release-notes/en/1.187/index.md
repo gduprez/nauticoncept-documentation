@@ -1,0 +1,66 @@
+---
+title: "Release Notes 1.187"
+description: "Release notes v1.187 of 2026-07-23"
+date: "2026-07-23"
+version: "1.187"
+---
+
+# Release Notes 1.187 — 2026-07-23
+
+## ✨ New Features
+
+### Document management by folder and hashtag organization
+- **Why**: Managing a large volume of boat documents was becoming complex and unstructured, making search and organization tedious for users.
+- **What was done**: Implemented a new folder view and hashtag tagging system for boat documents, added a hashtag input component, introduced a document preview button to open files in a new tab, and refined the display interface for untagged files.
+
+## 🐛 Bug Fixes
+
+### Automatic photo tagging fix in checklists
+- **Why**: When creating a checklist configured with photo tags, adding a new photo did not automatically apply the predefined tag.
+- **What was done**: Added support for the `photoTag` property in checklist question models and integrated data flow to automatically associate tags with added photo attachments.
+
+### Boat synchronization and matching fix with MMK
+- **Why**: It was impossible to match an existing boat in the application with its corresponding entry in the MMK booking system, preventing reservation synchronization.
+- **What was done**: Implemented a complete matching modal (`match-boat-mmk`), integrated MMK APIs for linking and unlinking boats, and added conditional options to remove boat associations.
+
+### Error handling for partial accreditation on demo boats without complementary services
+- **Why**: Adding partial accreditation to demonstration boats triggered a blocking system error due to the absence of configured complementary services.
+- **What was done**: Added null checks on complementary service arrays and deferred global setting initialization to the component lifecycle (`ngOnInit`).
+
+### Error notification for invalid email addresses during customer creation
+- **Why**: In standard rental mode, entering an invalid email address during new client creation returned no explicit error message, leading to user confusion.
+- **What was done**: Added localization keys and enhanced client form validation to immediately display a clear alert indicating that the email address is invalid.
+
+### NMEA fuel gauge reading preservation after navigation center shutdown
+- **Why**: When shutting down the boat's navigation unit, NMEA fuel gauge updates were lost, preventing professionals from checking fuel levels without powering on the boat again.
+- **What was done**: Adjusted engine speed calculations and refined engine mode detection in message cards to retain and display the last known NMEA fuel gauge readings even when the main navigation system is off.
+
+## 🔧 Improvements
+
+### Custom sorting in CRM lead list
+- **Why**: Professionals needed to sort and order their leads list (e.g., by assignment date or scheduled appointment) for better chronological follow-up.
+- **What was done**: Implemented multi-criteria sorting options in the dashboard lead list for customized chronological organization.
+
+### Direct display of deposit anomalies
+- **Why**: Users previously had to open the deposit edit modal to view anomalies, slowing down rental financial tracking.
+- **What was done**: Filtered rental subscription data payload and updated notification translations to make deposit anomalies directly visible from the overview.
+
+### Direct return navigation and quick access to subscriber profiles
+- **Why**: Header back navigation did not return directly to the previous page, and subscriber names were not clickable.
+- **What was done**: Updated the `PageTitle` header component to support direct back navigation (`BACK`) and added clickable links on subscriber names to navigate directly to their profile card.
+
+### Identification of key location information on boat cards
+- **Why**: Physical location or access instructions for boat keys were not specified in the boat identity section.
+- **What was done**: Added the key access info field (`accessInfos`) to the boat datasheet/location section along with French and English translations.
+
+### Owner status badge and exclusion from subscriber count
+- **Why**: Boat owners registered as subscribers were incorrectly included in subscriber counts, distorting statistics.
+- **What was done**: Added a distinct badge identifying when a subscriber is a boat owner and updated calculation logic to automatically exclude owners from the active subscriber count.
+
+### Selective hiding of partial reservation parameters in standard rental mode
+- **Why**: The "Partial reservation settings" panel appeared unnecessarily in commercial info during Standard rentals, even though it only applies to Liberty Pass offers.
+- **What was done**: Modified boat datasheet display logic to hide the partial reservations view when rental mode is set to Standard.
+
+### Technician search by team name during task assignment
+- **Why**: It was difficult to identify a technician's team (Workshop, Staff, etc.) when assigning them to a task.
+- **What was done**: Integrated working group (`workingGroup`) information into technician select options and display names in assignment menus.
